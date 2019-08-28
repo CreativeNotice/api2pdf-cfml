@@ -1,0 +1,30 @@
+{
+  "name": "Api2Pdf CFML Client Library",
+  "slug": "creativenotice-api2pdf-cfml",
+  "version": "0.1.0",
+  "author": "Ryan Mueller <rmueller2008@gmail.com>",
+  "Contributors": ["Ryan Mueller <rmueller2008@gmail.com>"],
+  "location": "https://github.com/CreativeNotice/api2pdf-cfml",
+  "Repository": {
+    "type": "git",
+    "URL": "https://github.com/CreativeNotice/api2pdf-cfml"
+  },
+  "bugs": "https://github.com/CreativeNotice/api2pdf-cfml/issues",
+  "shortDescription": "Provides a CFML client library for using the Api2Pdf API.",
+  "License": [{ "type": "MIT" }],
+  "packageDirectory": "api2pdf",
+  "engines": [
+    { "type": "lucee", "version": ">=5.2.x" },
+    { "type": "adobe", "version": ">=10.0.0" }
+  ],
+  "devDependencies": {
+    "testbox": "^3.0.0-snapshot"
+  },
+  "installPaths": {
+    "testbox": "testbox"
+  },
+  "testbox": {
+    "runner": "http://localhost:5998/tests/runner.cfm",
+    "verbose": false
+  }
+}
