@@ -162,35 +162,35 @@ component accessors=true {
 	function doAPIRequest( required string apiUrl, struct body, struct options, string method='POST', string charset='utf-8' ){
 
 		// Setup http service opject
-		httpService = new http( url = arguments.apiUrl, method = arguments.method, charset = arguments.charset );
-		httpService.addParam(name = 'Authorization', type = 'header', value = this.getApiKey() );
+		httpService = new http( url=arguments.apiUrl, method=arguments.method, charset=arguments.charset );
+		httpService.addParam( name='Authorization', type='header', value=this.getApiKey() );
 		
 		// Setup body if it exists
 		if( structKeyExists( arguments, 'body' ) ){
 
 			body['options'] = ( structKeyExists( arguments, 'options' ) ) ? arguments.options : {};
-			httpService.addParam(name = 'Body', type = 'body', value = serializeJSON( arguments.body ) );
+			httpService.addParam( name='Body', type='body', value=serializeJSON( arguments.body ) );
 		}
 
 		// Perform the http request
 		var response = httpService.send().getPrefix();
 
 		// Some basic error handling on the response
-		if( response.status_code != 200 ){
+		if( response.Responseheader.status_code != 200 ){
 			throw( 'Error requesting remote resource. HTTP response code: ' & response.errordetail, response );
 		}
 
-		if( ! isJSON( response.filecontent) ){
+		if( ! isJSON( response.filecontent ) ){
 			throw( 'API reponse is not of type json' );
 		}
 
 		// Let's return this in a cleaned up state
 		var sanitaryResponse = {
-			  'code'     = response.status_code
+			  'code'     = response.Responseheader.status_code
 			, 'error'    = response.errordetail
-			, 'content'  = deserializeJSON( response.filecontent )
+			, 'content'  = deserializeJSON( response.filecontent ).pdf
 			, 'original' = response
-		}
+		};
 
 		return sanitaryResponse;
 	};
